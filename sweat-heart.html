@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>爱心跳动</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 150px;
+				height: 150px;
+				background: darkred;
+				position: relative;
+				margin: 200px auto;
+				transform: rotate(45deg);
+			}
+			.box:before{
+				content: "";
+				width: 150px;
+				height: 150px;
+				background: darkred;
+				position: absolute;
+				right: 50%;
+				border-radius: 50%;
+			}
+			.box:after{
+				content: "";
+				width: 150px;
+				height: 150px;
+				background: darkred;
+				position: absolute;
+				bottom: 50%;
+				border-radius: 50%;
+			}
+			.box:hover{
+				animation: anima 1.5s infinite;
+			}
+			@-webkit-keyframes anima{
+				0%{
+					transform: scale(1) rotate(45deg);
+				}
+				50%{
+					transform: scale(0.5) rotate(45deg);
+				}
+				100%{
+					transform: scale(1) rotate(45deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+	</body>
+</html>

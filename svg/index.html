@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			svg{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">
+			<image x="0" y="0" width="100%" height="100%" xlink:href="img/2.jpg"></image>
+			<defs>
+				<image id="btfly" x="100" y="100" width="100" height="100" xlink:href="img/1.gif"></image>
+			</defs>
+			<use xlink:href="#btfly">
+				<animateMotion path="M10 80 q60 50 130 0" dur="13s" repeatCount="indefinite" rotate="auto"></animateMotion>
+			</use>
+			<use xlink:href="#btfly" transform="translate(300,300) scale(0.4)">
+				<animateMotion path="M40 30 l40 20 q80 50 100 20" dur="13s" repeatCount="indefinite" rotate="auto"></animateMotion>
+			</use>
+			<use xlink:href="#btfly" transform="translate(100,250) scale(0.7) rotate(180)">
+				<animateMotion path="M20 50 C60 20 30 70 80 30" dur="13s" repeatCount="indefinite" rotate="auto"></animateMotion>
+ 			</use>
+		</svg>
+	</body>
+</html>
