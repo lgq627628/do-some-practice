@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> 我赢职场VIP试听课程 </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="Author" content="">
+  <meta name="Keywords" content="我赢职场-李老师QQ:3125796229">
+  <meta name="Description" content="自从有了李老师妈妈再也不用担心我的学习。">
+	  <!--css,js-->
+<style type="text/css">
+	*{margin:0;padding:0;}
+	body{background:url("images/yh.png") no-repeat top center;font-size:12px;font-family:"微软雅黑"; color:#666;}
+	
+	/*dm start*/
+	.dm{width:100%;height:100%;background:rgba(0,0,0,0.8);position:absolute;top:0;left:0; z-index:1;}
+	.dm .s_close{width:38px;height:38px;display:block;background:red;text-align:center;line-height:38px;font-size:20px;color:#fff;text-decoration:none;border-radius:19px;
+		position:absolute;top:20px;right:20px;z-index:2;}
+	.dm .s_show{color:#fff; font-size:20px; position:relative;}
+	.dm .s_show div{position:absolute; right:0px; top:76px;}
+	/*底部css样式*/
+	.send{width:100%;height:76px;position:absolute;bottom:0;left:0; background:#000;}
+	.send .s_con{width:100%;height:76px;position:absolute;bottom:0;left:0;z-index:2;
+		text-align:center;line-height:76px;}
+	.send .s_con .s_txt{width:605px;height:36px;border:0;border-radius: 3px 0 0 3px;font-size:16px;font-family:"微软雅黑"; color:#666;line-height:36px;}
+	.send .s_con .s_sub{width:100px;height:37px;background:#65c33d;border:1px solid #5bba32;font-size:14px;font-family:"微软雅黑"; color:#fff;border-radius: 0 3px 3px 0;cursor: pointer; outline:none;}
+	.send .s_con .s_sub:hover{background:#3eaf0e;border-color: #329209;}
+	/*end dm*/
+</style> 
+ </head>
+      <body>
+        <a href="#" class="btn">弹幕</a>
+		<div class="dm">
+			<a href="#" class="s_close">X</a>
+			<div class="s_show">
+			  <div>欢迎大家来到恒诺教育web前端学院</div>
+			  <div>二十一世纪最帅的男人大宝老师。</div>
+			  <div>国庆快来 我想给祖国母亲庆祝生日。</div>
+			  <div>九月份已经过去了展望美好的十月。</div>
+			  <div>你在北方怎么样？ 我在南方冷成速冻饺子。</div>
+			  <div>祝愿所有同学，能学有所成，学有所获。</div>
+			</div>
+	
+		<!--send start-->
+		<div class="send">
+			<div class="s_con">
+				<input type="text" class="s_txt" /><input type="button" id="send_sub" value="发表评论" class="s_sub" />
+			</div>
+		</div>
+		<!--end send-->
+
+	</div>
+	<!--end dm-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(".s_close").click(function(){
+			$(".dm").fadeOut(500);
+		})
+		$(".btn").click(function(){
+			$(".dm").fadeIn(500);
+		})
+		
+		
+		function init(){
+			var _top=0;
+			$(".s_show").find("div").show().each(function(){
+				_top=_top+70;
+				var _left=$(document).width()-$(this).width();
+				$(this).css({top:_top,left:_left,color:"#ff6600"});
+				var time=Math.random()*10000+6000;
+				$(this).animate({left:"-"+_left+"px"},time,function(){
+					$(this).remove();
+				});
+			});
+		}
+		init();
+		
+		
+		$("#send_sub").click(function(){
+			var text=$(".s_txt").val();
+			var label=$("<div>"+text+"</div>");
+			$(".s_show").append(label);
+		})
+	</script>
+	 </body>
+</html>
