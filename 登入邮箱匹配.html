@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#app{
+			width: 800px;
+			height: 400px;
+			margin: 100px auto;
+			border: 1px solid #ccc;
+			box-shadow: 1px 2px #ccc;
+			padding-top: 80px;
+		}
+		label{
+			margin-left: 80px;
+		}
+		input{
+			width: 300px;
+			padding: 10px;
+			margin-left: 10px;
+		}
+		ul{
+			width: 302px;
+			margin-left: 138px;
+			margin-top: -1px;
+			border: 1px solid #ccc;
+			padding: 4px 10px;
+		}
+		li{
+			list-style: none;
+			line-height: 24px;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<label for="login">账户名</label><input id="login" v-model="msg" type="text" placeholder="请输入电子邮箱">
+	<ul v-if="msg">
+		<li v-for="mail in mails">{{ dealMsg }}@{{mail}}.com</li>
+	</ul>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript">
+	var app = new Vue({
+		el:"#app",
+		data:{
+			msg: '',
+			mails:['163','qq','126','189','sina','gmail','sohu']
+		},
+		// 动态绑定数据
+		computed:{
+			dealMsg:function(){
+				// 处理msg，截取@前面的字符串
+				var num = this.msg.indexOf('@');
+				return num>=0?this.msg.slice(0,num):this.msg
+			}
+		}
+	})
+</script>
+</body>
+</html>

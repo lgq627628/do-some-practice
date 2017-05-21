@@ -1,0 +1,20 @@
+function unique1(arr){
+	var obj={};
+	var newArr=[];
+	for (var i = 0; i < arr.length; i++) {
+		if(!obj[arr[i]]){
+			newArr.push(arr[i]);
+			obj[arr[i]]=1;
+		}
+	}
+	return newArr
+}
+
+function unique2(arr)
+{
+	var newArr = []; 
+	for(var i = 0; i < arr.length; i++) {
+		if (newArr.indexOf(arr[i]) == -1) newArr.push(arr[i]);
+	}
+	return newArr;
+}
