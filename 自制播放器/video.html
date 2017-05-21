@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>自制播放器</title>
+</head>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+#ing{
+	width: 300px;
+	height: 30px;
+	background: #666;
+	overflow: hidden;
+	position: relative;
+}
+#ing1{
+	width: 60px;
+	height: 30px;
+	background: red;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#vol{
+	width: 300px;
+	height: 10px;
+	background: #666;
+	overflow: hidden;
+	position: relative;
+	margin-top: 10px;
+}
+#vol1{
+	width: 60px;
+	height: 10px;
+	background: yellow;
+	position: absolute;
+	left: 240px;
+	top: 0;
+}
+</style>
+<body>
+<video id="video">
+	<source src="Intermission-Walk-in.ogv"></source>
+	<source src="Intermission-Walk-in_512kb.mp4"></source>
+</video>
+<input type="button" value="播放">
+<input type="button" value="00:00:00">
+<input type="button" value="00:00:00">
+<input type="button" value="静音">
+<input type="button" value="全屏">
+
+<div id="ing">
+	<div id="ing1"></div>
+</div>
+<div id="vol">
+	<div id="vol1"></div>
+</div>
+<script type="text/javascript">
+window.onload = function(){
+	var oVideo = document.getElementById('video');
+	var aInput = document.getElementsByTagName('input');
+	var oIng = document.getElementById('ing');
+	var oIng1 = document.getElementById('ing1');
+	var oVol = document.getElementById('vol');
+	var oVol1 = document.getElementById('vol1');
+	var disX,disY;
+	var timer = null;
+
+	aInput[0].onclick = function(){
+		if( oVideo.paused ){
+			oVideo.play();
+			this.value = '暂停';
+			nowTime();
+			timer = setInterval(function(){
+				nowTime();
+			},1000)
+		}else{
+			oVideo.pause();
+			this.value = '播放';
+			clearInterval(timer);
+		}
+	}
+
+	function nowTime(){
+		aInput[1].value = changeTime(oVideo.currentTime);
+	
+		var iScale = oVideo.currentTime/oVideo.duration;
+		oIng1.style.left = iScale*(oIng.offsetWidth - oIng1.offsetWidth) +"px";
+
+			
+			oVideo.currentTime = iScale * oVideo.duration;
+	}
+
+	aInput[2].value = changeTime(oVideo.duration);
+
+	aInput[3].onclick = function(){
+		if(oVideo.muted){
+			oVideo.volume = 1;
+			this.value = '静音';
+			oVideo.muted = false;
+		}else{
+			oVideo.volume = 0;
+			this.value = '取消静音';
+			oVideo.muted = true;
+		}
+	}
+
+	aInput[4].onclick = function(){
+		oVideo.webkitRequestFullScreen();
+	}
+
+	oIng1.onmousedown =function(ev){
+		var ev = ev || window.event;
+		disX = ev.clientX - this.offsetLeft;
+		document.onmousemove = function(ev){
+			var ev = ev || window.event;
+			var L = ev.clientX -disX;
+			if(L > (oIng.offsetWidth - oIng1.offsetWidth)){
+				L = 240;
+			}else if(L < 0){
+				L = 0 ;
+			}
+			oIng1.style.left = L +"px";
+
+			var iScale = L/(oIng.offsetWidth - oIng1.offsetWidth);
+			oVideo.currentTime = iScale * oVideo.duration;
+			nowTime();
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+		}
+		return false;
+	}
+
+		oVol1.onmousedown =function(ev){
+		var ev = ev || window.event;
+		disX = ev.clientX - this.offsetLeft;
+		document.onmousemove = function(ev){
+			var ev = ev || window.event;
+			var L = ev.clientX -disX;
+			if(L > (oVol.offsetWidth - oVol1.offsetWidth)){
+				L = 240;
+			}else if(L < 0){
+				L = 0 ;
+			}
+			oVol1.style.left = L +"px";
+			var iScale = L/(oVol.offsetWidth - oVol1.offsetWidth);
+			oVideo.volume = iScale;
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+		}
+		return false;
+	}
+
+	function changeTime(iTime){
+		iTime = parseInt(iTime);
+		
+		var hour = Math.floor(iTime/3600);
+		if(hour <= 9){
+			hour = '0' + hour;
+		}
+		var min = Math.floor(iTime%3600/60);
+		if(min <= 9){
+			min = '0' + min;
+		}
+		var sec = Math.floor(iTime%60);
+		if(sec <= 9){
+			sec = '0' + sec;
+		}
+
+		return hour + ":" + min + ":" + sec;
+	}
+
+
+}
+</script>
+</body>
+</html>
