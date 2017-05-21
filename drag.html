@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>拖拽效果</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#hh{
+			position: absolute;
+			top: 100px;
+			left: 100px;
+			width: 100px;
+			height: 100px;
+			background: linear-gradient(to bottom,rgba(255,0,255,0.5),rgba(0,255,0,0.5));
+		}
+	</style>
+</head>
+<body>
+<div id="hh"></div>
+<script type="text/javascript">
+	window.onload = function () {
+		var hh = document.getElementById('hh');
+		var flag = 0;
+
+		hh.onmousedown=function(ev){  
+            var distX=ev.clientX-hh.offsetLeft;   //获取边界到鼠标的距离  
+            var distY=ev.clientY-hh.offsetTop; 
+
+            document.onmousemove=function(ev){  
+                var x=ev.clientX-distX;  
+                var y=ev.clientY-distY;  
+                if(x<0){  
+                    x=0;  
+                }  
+                if(y<0){  
+                    y=0;  
+                }  
+                if(x>(document.documentElement.clientWidth-hh.offsetWidth))  
+                {  
+                    x=document.documentElement.clientWidth-hh.offsetWidth;  
+                } 
+            	hh.style.left=x+'px';    //根据鼠标位置相对定位，得到left，top值  
+           		hh.style.top=y+'px'; 	 
+            }  
+            document.onmouseup = function(){
+            	document.onmousemove =null;
+            } 
+        } 
+	}
+</script>
+</body>
+</html>
